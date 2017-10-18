@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Roger Wang">
+    <meta name="netID" content="rw794">
+    <title>Robot</title>
+  <head>
+
+  <body>
+    <canvas id="glcanvas" width="600" height="480">
+      Browser does not support WebGL
+    </canvas>
+    <table>
+      <caption>Robot Translation</caption>
+      <tr>
+        <td>
+          X: -2
+          <input type="range" id="robot_delta_x" value="0.0" min="-2" max="2" step="0.01">
+          2
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Y: -2
+          <input type="range" id="robot_delta_y" value="0.0" min="-2" max="2" step="0.01">
+          2
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Z: -2
+          <input type="range" id="robot_delta_z" value="0.0" min="-2" max="2" step="0.01">
+          2
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <caption>Robot Rotation</caption>
+      <tr>
+        <td>
+          Y: -6.28
+          <input type="range" id="robot_rotate_y" value="0.0" min="-6.28" max="6.28" step="0.01">
+          6.28
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <caption>Upper Arm Rotation</caption>
+      <tr>
+        <td>
+          Y: -6.28
+          <input type="range" id="upper_arm_rotate_y" value="0.0" min="-6.28" max="6.28" step="0.01">
+          6.28
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Z: -6.28
+          <input type="range" id="upper_arm_rotate_z" value="0.0" min="-6.28" max="6.28" step="0.01">
+          6.28
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <caption>Lower Arm Rotation</caption>
+      <tr>
+        <td>
+          Y: -6.28
+          <input type="range" id="lower_arm_rotate_y" value="0.0" min="-6.28" max="6.28" step="0.01">
+          6.28
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Z: -6.28
+          <input type="range" id="lower_arm_rotate_z" value="0.0" min="-6.28" max="6.28" step="0.01">
+          6.28
+        </td>
+      </tr>
+    </table>
+  </body>
+
+  <script src="gl-matrix.js"></script>
+  <script src="robot.js"></script>
+</html>

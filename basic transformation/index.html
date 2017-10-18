@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="Roger Wang">
+		<meta name="netID" content="rw6994">
+		<title>Basic Transformation</title>
+	</head>
+
+	<body>
+		<canvas id="draw_surface" width="400" height="400">
+			Browser does not support WebGL
+		</canvas>
+		<table>
+			<caption>Translation</caption>
+			<tr>
+				<td>
+					X
+					-0.69
+					<input type="range" id="delta_x" value="0.0" min="-0.69" max="0.69" step="0.01">
+					0.69
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Y
+					-0.69
+					<input type="range" id="delta_y" value="0.0" min="-0.69" max="0.69" step="0.01">
+					0.69
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Z
+					-0.69
+					<input type="range" id="delta_z" value="0.0" min="-0.69" max="0.69" step="0.01">
+					0.69
+				</td>
+			</tr>
+		</table>
+		<table>
+			<caption>Rotation</caption>
+			<tr>
+				<td>
+					X
+					-6.28
+					<input type="range" id="rotate_x" value="0.0" min="-6.28" max="6.28" step="0.01">
+					6.28
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Y
+					-6.28
+					<input type="range" id="rotate_y" value="0.0" min="-6.28" max="6.28" step="0.01">
+					6.28
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Z
+					-6.28
+					<input type="range" id="rotate_z" value="0.0" min="-6.28" max="6.28" step="0.01">
+					6.28
+				</td>
+			</tr>
+		</table>
+		<table>
+			<caption>Scale</caption>
+			<tr>
+				<td>
+					X
+					0.1
+					<input type="range" id="scale_x" value="1.0" min="0.1" max="3.0" step="0.01">
+					3.0
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Y
+					0.1
+					<input type="range" id="scale_y" value="1.0" min="0.1" max="3.0" step="0.01">
+					3.0
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Z
+					0.1
+					<input type="range" id="scale_z" value="1.0" min="0.1" max="3.0" step="0.01">
+					3.0
+				</td>
+			</tr>
+		</table>
+
+	</body>
+
+	<script src="gl-matrix.js"></script>
+	<script src="basic transformation.js"></script>
+</html>

@@ -1,6 +1,14 @@
 "use strict";
 
-var rotation = 1; //1 5 16
+let scale_x = 1.0;
+let scale_y = 1.0;
+let scale_z = 1.0;
+let rotate_x = 0.0; //1 5 16
+let rotate_y = 0.0;
+let rotate_z = 0.0;
+let delta_x = 0.0;
+let delta_y = 0.0;
+let delta_z = 0.0;
 
 main();
 
@@ -8,7 +16,7 @@ main();
 // Start here
 //
 function main() {
-  const canvas = document.querySelector('#glcanvas');
+  const canvas = document.getElementById('draw_surface');
   const gl = canvas.getContext('webgl');
 
   // If we don't have a GL context, give up now
@@ -23,11 +31,13 @@ function main() {
   const vsSource = `
     attribute vec4 aVertexPosition;
     attribute vec4 aVertexColor;
+
     uniform mat4 uModelViewMatrix;
-    uniform mat4 uProjectionMatrix;
+
     varying lowp vec4 vColor;
+
     void main(void) {
-      gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+      gl_Position = uModelViewMatrix * aVertexPosition;
       vColor = aVertexColor;
     }
   `;
@@ -36,6 +46,7 @@ function main() {
 
   const fsSource = `
     varying lowp vec4 vColor;
+
     void main(void) {
       gl_FragColor = vColor;
     }
@@ -56,7 +67,7 @@ function main() {
       vertexColor: gl.getAttribLocation(shaderProgram, 'aVertexColor'),
     },
     uniformLocations: {
-      projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
+      // projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
       modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
     },
   };
@@ -66,6 +77,64 @@ function main() {
   const buffers = initBuffers(gl);
 
   drawScene(gl, programInfo, buffers);
+
+  document.getElementById("delta_x").addEventListener("mousemove", 
+    function() {
+      delta_x = document.getElementById("delta_x").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(delta_x);
+    });
+  document.getElementById("delta_y").addEventListener("mousemove", 
+    function() {
+      delta_y = document.getElementById("delta_y").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(delta_y);
+    });
+  document.getElementById("delta_z").addEventListener("mousemove", 
+    function() {
+      delta_z = document.getElementById("delta_z").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(delta_z);
+    });
+  document.getElementById("rotate_x").addEventListener("mousemove", 
+    function() {
+      rotate_x = document.getElementById("rotate_x").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(rotate_x);
+    });
+  document.getElementById("rotate_y").addEventListener("mousemove", 
+    function() {
+      rotate_y = document.getElementById("rotate_y").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(rotate_y);
+    });
+  document.getElementById("rotate_z").addEventListener("mousemove", 
+    function() {
+      rotate_z = document.getElementById("rotate_z").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(rotate_z);
+    });
+  document.getElementById("scale_x").addEventListener("mousemove", 
+    function() {
+      scale_x = document.getElementById("scale_x").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(scale_x);
+    });
+  document.getElementById("scale_y").addEventListener("mousemove", 
+    function() {
+      scale_y = document.getElementById("scale_y").value;
+      drawScene(gl, programInfo, buffers);
+      console.log(scale_y);
+    });
+  document.getElementById("scale_z").addEventListener("mousemove", 
+    function() {
+      scale_z = document.getElementById("scale_z").value;
+      drawScene(gl, programInfo, buffers);
+      console.log("scale_z", scale_z);
+    });
+
+  // Unbind the buffer for safety
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
 }
 
 //
@@ -77,63 +146,58 @@ function main() {
 function initBuffers(gl) {
 
   // Create a buffer for the cube's vertex positions.
-
   const positionBuffer = gl.createBuffer();
 
   // Select the positionBuffer as the one to apply buffer
   // operations to from here out.
-
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
   // Now create an array of positions for the cube.
-
   const positions = [
     // Front face
-    -1.0, -1.0,  1.0,
-     1.0, -1.0,  1.0,
-     1.0,  1.0,  1.0,
-    -1.0,  1.0,  1.0,
+    -0.3, -0.3,  0.3,
+     0.3, -0.3,  0.3,
+     0.3,  0.3,  0.3,
+    -0.3,  0.3,  0.3,
 
     // Back face
-    -1.0, -1.0, -1.0,
-    -1.0,  1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0, -1.0, -1.0,
+    -0.3, -0.3, -0.3,
+    -0.3,  0.3, -0.3,
+     0.3,  0.3, -0.3,
+     0.3, -0.3, -0.3,
 
     // Top face
-    -1.0,  1.0, -1.0,
-    -1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0, -1.0,
+    -0.3,  0.3, -0.3,
+    -0.3,  0.3,  0.3,
+     0.3,  0.3,  0.3,
+     0.3,  0.3, -0.3,
 
     // Bottom face
-    -1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-     1.0, -1.0,  1.0,
-    -1.0, -1.0,  1.0,
+    -0.3, -0.3, -0.3,
+     0.3, -0.3, -0.3,
+     0.3, -0.3,  0.3,
+    -0.3, -0.3,  0.3,
 
     // Right face
-     1.0, -1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0,  1.0,  1.0,
-     1.0, -1.0,  1.0,
+     0.3, -0.3, -0.3,
+     0.3,  0.3, -0.3,
+     0.3,  0.3,  0.3,
+     0.3, -0.3,  0.3,
 
     // Left face
-    -1.0, -1.0, -1.0,
-    -1.0, -1.0,  1.0,
-    -1.0,  1.0,  1.0,
-    -1.0,  1.0, -1.0,
+    -0.3, -0.3, -0.3,
+    -0.3, -0.3,  0.3,
+    -0.3,  0.3,  0.3,
+    -0.3,  0.3, -0.3,
   ];
 
   // Now pass the list of positions into WebGL to build the
   // shape. We do this by creating a Float32Array from the
   // JavaScript array, then use it to fill the current buffer.
-
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
   // Now set up the colors for the faces. We'll use solid colors
   // for each face.
-
   const faceColors = [
     [1.0,  1.0,  1.0,  1.0],    // Front face: white
     [1.0,  0.0,  0.0,  1.0],    // Back face: red
@@ -144,7 +208,6 @@ function initBuffers(gl) {
   ];
 
   // Convert the array of colors into a table for all the vertices.
-
   var colors = [];
 
   for (var j = 0; j < faceColors.length; ++j) {
@@ -162,14 +225,12 @@ function initBuffers(gl) {
   
   // Build the element array buffer; this specifies the indices
   // into the vertex arrays for each face's vertices.
-
   const indexBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 
   // This array defines each face as two triangles, using the
   // indices into the vertex array to specify each triangle's
   // position.
-
   const indices = [
     0,  1,  2,      0,  2,  3,    // front
     4,  5,  6,      4,  6,  7,    // back
@@ -180,7 +241,6 @@ function initBuffers(gl) {
   ];
 
   // Now send the element array to GL
-
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,
       new Uint16Array(indices), gl.STATIC_DRAW);
 
@@ -201,29 +261,7 @@ function drawScene(gl, programInfo, buffers) {
   gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
 
   // Clear the canvas before we start drawing on it.
-
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-  // Create a perspective matrix, a special matrix that is
-  // used to simulate the distortion of perspective in a camera.
-  // Our field of view is 45 degrees, with a width/height
-  // ratio that matches the display size of the canvas
-  // and we only want to see objects between 0.1 units
-  // and 100 units away from the camera.
-
-  const fieldOfView = 45 * Math.PI / 180;   // in radians
-  const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
-  const zNear = 0.1;
-  const zFar = 100.0;
-  const projectionMatrix = mat4.create();
-
-  // note: glmatrix.js always has the first argument
-  // as the destination to receive the result.
-  mat4.perspective(projectionMatrix,
-                   fieldOfView,
-                   aspect,
-                   zNear,
-                   zFar);
 
   // Set the drawing position to the "identity" point, which is
   // the center of the scene.
@@ -234,16 +272,25 @@ function drawScene(gl, programInfo, buffers) {
 
   mat4.translate(modelViewMatrix,     // destination matrix
                  modelViewMatrix,     // matrix to translate
-                 [-0.0, 0.0, -6.0]);  // amount to translate
+                 [delta_x, delta_y, delta_z]);  // amount to translate
+  
   mat4.rotate(modelViewMatrix,  // destination matrix
               modelViewMatrix,  // matrix to rotate
-              rotation,     // amount to rotate in radians
-              [1, 1, 1]);       // axis to rotate around (Z)
-  // mat4.rotate(modelViewMatrix,  // destination matrix
-  //             modelViewMatrix,  // matrix to rotate
-  //             rotation,// amount to rotate in radians
-  //             [0, 1, 0]);       // axis to rotate around (X)
+              rotate_x,     // amount to rotate in radians
+              [1, 0, 0]);       // axis to rotate around (X)
+  mat4.rotate(modelViewMatrix,  // destination matrix
+              modelViewMatrix,  // matrix to rotate
+              rotate_y,     // amount to rotate in radians
+              [0, 1, 0]);       // axis to rotate around (Y)
+  mat4.rotate(modelViewMatrix,  // destination matrix
+              modelViewMatrix,  // matrix to rotate
+              rotate_z,     // amount to rotate in radians
+              [0, 0, 1]);       // axis to rotate around (Z)
 
+  mat4.scale(modelViewMatrix,  // destination matrix
+              modelViewMatrix,  // matrix to scale
+              [scale_x, scale_y, scale_z]); // amount to scale
+  
   // Tell WebGL how to pull out the positions from the position
   // buffer into the vertexPosition attribute
   {
@@ -293,10 +340,10 @@ function drawScene(gl, programInfo, buffers) {
 
   // Set the shader uniforms
 
-  gl.uniformMatrix4fv(
-      programInfo.uniformLocations.projectionMatrix,
-      false,
-      projectionMatrix);
+  // gl.uniformMatrix4fv(
+  //     programInfo.uniformLocations.projectionMatrix,
+  //     false,
+  //     projectionMatrix);
   gl.uniformMatrix4fv(
       programInfo.uniformLocations.modelViewMatrix,
       false,
