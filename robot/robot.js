@@ -71,42 +71,42 @@ function main()
 
   drawScene(gl, programInfo, buffers);
 
-  document.getElementById("robot_delta_x").addEventListener("mousemove", 
+  document.getElementById("robot_delta_x").addEventListener("input", 
     function() {
       robot_delta_x = document.getElementById("robot_delta_x").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("robot_delta_y").addEventListener("mousemove", 
+  document.getElementById("robot_delta_y").addEventListener("input", 
     function() {
       robot_delta_y = document.getElementById("robot_delta_y").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("robot_delta_z").addEventListener("mousemove", 
+  document.getElementById("robot_delta_z").addEventListener("input", 
     function() {
       robot_delta_z = document.getElementById("robot_delta_z").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("robot_rotate_y").addEventListener("mousemove", 
+  document.getElementById("robot_rotate_y").addEventListener("input", 
     function() {
       robot_rotate_y = document.getElementById("robot_rotate_y").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("upper_arm_rotate_y").addEventListener("mousemove", 
+  document.getElementById("upper_arm_rotate_y").addEventListener("input", 
     function() {
       upper_arm_rotate_y = document.getElementById("upper_arm_rotate_y").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("upper_arm_rotate_z").addEventListener("mousemove", 
+  document.getElementById("upper_arm_rotate_z").addEventListener("input", 
     function() {
       upper_arm_rotate_z = document.getElementById("upper_arm_rotate_z").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("lower_arm_rotate_y").addEventListener("mousemove", 
+  document.getElementById("lower_arm_rotate_y").addEventListener("input", 
     function() {
       lower_arm_rotate_y = document.getElementById("lower_arm_rotate_y").value;
       drawScene(gl, programInfo, buffers);
     });
-  document.getElementById("lower_arm_rotate_z").addEventListener("mousemove", 
+  document.getElementById("lower_arm_rotate_z").addEventListener("input", 
     function() {
       lower_arm_rotate_z = document.getElementById("lower_arm_rotate_z").value;
       drawScene(gl, programInfo, buffers);
