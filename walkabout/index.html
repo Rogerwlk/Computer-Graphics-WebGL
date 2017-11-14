@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Roger Wang">
+    <meta name="netID" content="rw794">
+    <title>Solar System</title>
+  <head>
+
+  <body>
+    <canvas id="glcanvas" width="600" height="480">
+      Browser does not support WebGL
+    </canvas>
+    <table>
+      <caption>Scene Translation</caption>
+      <tr>
+        <td>
+          X: -30
+          <input type="range" id="scene_delta_x" value="0.0" min="-30" max="30" step="0.3">
+          30
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Y: -30
+          <input type="range" id="scene_delta_y" value="0.0" min="-30" max="30" step="0.3">
+          30
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Z: 0
+          <input type="range" id="scene_delta_z" value="-90.0" min="-90.0" max="-40.0" step="1">
+          50
+        </td>
+      </tr>
+    </table>
+  </body>
+
+  <script src="basicModelLibrary.js"></script>
+  <script src="gl-matrix.js"></script>
+  <script src="walkabout.js"></script>
+</html>
